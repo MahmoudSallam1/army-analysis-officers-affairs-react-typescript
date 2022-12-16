@@ -31,6 +31,8 @@ import {
 
 import Sidebar from "./components/Sidebar";
 
+import { Barchart } from "./charts/Barchart";
+
 function App() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const toggleSidebar = () => setSidebarOpen(!isSidebarOpen);
@@ -49,7 +51,9 @@ function App() {
         <GridItem pl="2" bg="blue.300" area={"header"}>
           شئون ضباط الجيش الثانى الميدانى
         </GridItem>
-        <GridItem boxShadow="lg" bg="white" pl="2" area={"nav"}>Nav</GridItem>
+        <GridItem boxShadow="lg" bg="white" pl="2" area={"nav"}>
+          Nav
+        </GridItem>
         <GridItem pl="2" bg="blue.200" area={"main"}>
           <Container maxW="900px">
             <Center h="150px">
@@ -189,14 +193,7 @@ function App() {
                     </TableContainer>
                   </TabPanel>
                   <TabPanel>
-                    <Text color="gray">
-                      وريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن
-                      الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع
-                      ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي
-                      منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من
-                      الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل
-                      أو مرجع شكلي لهذه الأحرف
-                    </Text>{" "}
+                    <Barchart />
                   </TabPanel>
                   <TabPanel>
                     <Text color="gray">
