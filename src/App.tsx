@@ -47,7 +47,7 @@ function App() {
           <TabPanels>
             <TabPanel>
               <TableContainer>
-                <Table variant="striped" colorScheme="blue">
+                <Table variant="striped" >
                   <TableCaption>النشرة القيادية 2023م</TableCaption>
                   <Thead>
                     <Tr>
