@@ -22,9 +22,9 @@
     },
     "type": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "api::type.type",
-      "mappedBy": "weapon"
+      "inversedBy": "weapons"
     }
   }
 }

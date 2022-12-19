@@ -18,11 +18,11 @@
       "target": "api::nashara.nashara",
       "inversedBy": "types"
     },
-    "weapon": {
+    "weapons": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::weapon.weapon",
-      "inversedBy": "type"
+      "mappedBy": "type"
     },
     "name": {
       "type": "string",

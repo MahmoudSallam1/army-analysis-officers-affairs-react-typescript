@@ -24,7 +24,7 @@ function NasharaDetails() {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`http://localhost:1337/api/nasharas/${id}?populate=%2A`)
+      .get(`http://localhost:1337/api/nasharas/${id}?populate=deep`)
       .then(function (response) {
         console.log(response);
         const { data } = response;
@@ -36,7 +36,6 @@ function NasharaDetails() {
       });
   }, []);
 
-  console.log(nashara);
   return (
     <>
       <Divider orientation="horizontal" />
@@ -49,33 +48,30 @@ function NasharaDetails() {
             </Text>
           </Center>
 
-          <Box m={4} padding="6" boxShadow="lg" bg="white">
-            <Tabs variant="soft-rounded" colorScheme="teal">
-              <TabList>
-                <Tab>النشرة القيادية</Tab>
-                <Tab>النشرة الفرعية</Tab>
-                <Tab>نشرة الشرفيين</Tab>
-              </TabList>
-              <TabPanels>
-                <TabPanel>
-                  <Table />
-                </TabPanel>
-                <TabPanel>
-                  <Barchart />
-                </TabPanel>
-                <TabPanel>
-                  <Text color="gray">
-                    وريم إيبسوم(Lorem Ipsum) هو ببساطة نص شكلي (بمعنى أن الغاية
-                    هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور
-                    النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ
-                    القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من
-                    الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو
-                    مرجع شكلي لهذه الأحرف
-                  </Text>{" "}
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </Box>
+          {nashara.attributes?.types?.data.map((type: any) => (
+            <Box
+              key={type.attributes?.name}
+              m={4}
+              padding="6"
+              boxShadow="lg"
+              bg="white"
+            >
+              <Tabs variant="soft-rounded" colorScheme="teal">
+                <TabList>
+                  <Tab>{type.attributes?.name} </Tab>
+                  <Tab key={type.attributes?.name}>تحليل النشرة</Tab>
+                </TabList>
+                <TabPanels>
+                  <TabPanel>
+                    <Table weapons={type.attributes?.weapons.data} />
+                  </TabPanel>
+                  <TabPanel>
+                    <Barchart weapons={type.attributes?.weapons.data} />
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            </Box>
+          ))}
         </Container>
       </Box>
     </>
