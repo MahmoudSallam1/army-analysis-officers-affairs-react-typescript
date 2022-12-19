@@ -10,6 +10,8 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
+import {  ButtonGroup } from '@chakra-ui/react'
+
 interface Props {
   onClose: Function;
   isOpen: boolean;
