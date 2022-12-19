@@ -8,8 +8,10 @@ import {
 
 import App from "../App";
 import NasharaDetails from "../pages/NasharaDetails";
+import Navbar from "../components/Navbar";
 
 export const router = createBrowserRouter([
+
   {
     path: "/",
     element: <App />,

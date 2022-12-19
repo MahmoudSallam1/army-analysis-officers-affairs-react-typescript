@@ -11,8 +11,6 @@ import { AddIcon } from "@chakra-ui/icons";
 
 import Card from "./components/Card";
 
-
-
 import axios from "axios";
 
 function App() {
@@ -62,7 +60,7 @@ function App() {
           >
             {nasharas &&
               nasharas.map((nashara) => (
-                <GridItem>
+                <GridItem key={nashara.id}>
                   <Card
                     nasharaID={nashara.id}
                     title={nashara.attributes.name}

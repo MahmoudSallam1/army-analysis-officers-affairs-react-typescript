@@ -11,12 +11,16 @@ import Logo from "../assets/logoRGB.jpg";
 function Navbar() {
   return (
     <Flex p={2} minWidth="max-content" alignItems="center" gap="2">
-      <Box >
+      {" "}
+      <Box>
         <Text as="b">قيادة الجيش الثانى الميدانى</Text>
         <Text color="gray"> ادارة شئون الضباط </Text>{" "}
       </Box>
       <Spacer />
-      <Image boxSize="100px" objectFit="cover" src={Logo} alt="Logo" />;
+      <a href="/">
+        {" "}
+        <Image boxSize="100px" objectFit="cover" src={Logo} alt="Logo" />
+      </a>
     </Flex>
   );
 }

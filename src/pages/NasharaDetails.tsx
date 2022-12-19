@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container } from "@chakra-ui/react";
 
 import { Text } from "@chakra-ui/react";
@@ -14,9 +14,29 @@ import { Barchart } from "../charts/Barchart";
 import { Divider } from "@chakra-ui/react";
 
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 function NasharaDetails() {
   const { id } = useParams();
+  const [nashara, setNashara] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+    axios
+      .get(`http://localhost:1337/api/nasharas/${id}?populate=%2A`)
+      .then(function (response) {
+        console.log(response);
+        const { data } = response;
+        setNashara(data?.data);
+        setIsLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  console.log(nashara);
   return (
     <>
       <Divider orientation="horizontal" />
@@ -25,7 +45,7 @@ function NasharaDetails() {
           <Center h="80px">
             <Text as="b" fontSize="2xl">
               {" "}
-              بيان عددى بمطالب الجيش بنشرة تنقلات الضباط
+              {nashara.attributes?.name}
             </Text>
           </Center>
 
