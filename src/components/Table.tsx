@@ -17,7 +17,7 @@ function Table({ weapons }: TableProps) {
   return (
     <TableContainer>
       <CharkaTable variant="striped">
-        <TableCaption> ادارة شئوون الضباط</TableCaption>
+        <TableCaption> ادارة شئون الضباط</TableCaption>
         <Thead>
           <Tr>
             <Th> البيان</Th>

@@ -14,7 +14,7 @@ function Navbar() {
       {" "}
       <Box>
         <Text as="b">قيادة الجيش الثانى الميدانى</Text>
-        <Text color="gray"> ادارة شئوون الضباط </Text>{" "}
+        <Text color="gray"> ادارة شئون الضباط </Text>{" "}
       </Box>
       <Spacer />
       <a href="/">
