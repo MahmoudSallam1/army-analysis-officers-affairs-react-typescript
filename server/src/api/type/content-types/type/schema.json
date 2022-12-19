@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "types",
+  "info": {
+    "singularName": "type",
+    "pluralName": "types",
+    "displayName": "type",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nashara": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::nashara.nashara",
+      "inversedBy": "types"
+    },
+    "weapon": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::weapon.weapon",
+      "inversedBy": "type"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

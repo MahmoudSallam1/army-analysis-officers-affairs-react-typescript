@@ -1,36 +1,44 @@
 import React from "react";
 import {
   Card as CharkaCard,
-  CardHeader,
   CardBody,
   CardFooter,
-  Heading
+  Heading,
 } from "@chakra-ui/react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
 
 import { Stack } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
-function Card() {
+type CardProps = {
+  title: string;
+  description: string;
+  date: string;
+  nasharaID: number;
+};
+
+function Card({ title, description, date, nasharaID }: CardProps) {
+  const navigate = useNavigate();
   return (
     <CharkaCard bg="white" maxW="sm">
       <CardBody>
         <Stack mt="6" spacing="3">
-          <Heading size="md">
-            نشرة ضباط يناير 2023م
-          </Heading>
-          <Text color="gray">
-            لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل
-          </Text>
-          <Text color="teal" >
-            01/01/2023
-          </Text>
+          <Heading size="md">{title}</Heading>
+          <Text color="gray">{description} </Text>
+          <Text color="teal">{date}</Text>
         </Stack>
       </CardBody>
       <Divider />
       <CardFooter>
-        <Button w="100%" variant="solid" colorScheme="teal">
+        <Button
+          style={{ display: "block" }}
+          w="100%"
+          variant="solid"
+          colorScheme="teal"
+          onClick={() => navigate(`/nashara/${nasharaID}`)}
+        >
           النشرة
         </Button>
       </CardFooter>

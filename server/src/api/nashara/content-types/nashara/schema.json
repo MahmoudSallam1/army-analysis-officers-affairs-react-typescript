@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nasharas",
+  "info": {
+    "singularName": "nashara",
+    "pluralName": "nasharas",
+    "displayName": "Nashara",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "date"
+    },
+    "description": {
+      "type": "text"
+    },
+    "types": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::type.type",
+      "mappedBy": "nashara"
+    }
+  }
+}
