@@ -13,8 +13,17 @@ import Card from "./components/Card";
 
 import axios from "axios";
 
+type NasharaType = {
+  id: number;
+  attributes: {
+    name: string;
+    description: string;
+    date: string;
+  };
+};
+
 function App() {
-  const [nasharas, setNasharas] = useState<any[]>([]);
+  const [nasharas, setNasharas] = useState<NasharaType[] | null>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
