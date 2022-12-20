@@ -35,12 +35,22 @@ export function Barchart({ weapons }: BarProps) {
     },
   };
 
-  const labels: string[] = weapons.map((weapon: any) => weapon.attributes.name);
+  type WeaponType = {
+    attributes: {
+      name?: string;
+      achieved?: number;
+      requested?: number;
+    };
+  };
+
+  const labels: string[] = weapons.map(
+    (weapon: WeaponType) => weapon.attributes.name
+  );
   const achieved: number[] = weapons.map(
-    (weapon: any) => weapon.attributes.achieved
+    (weapon: WeaponType) => weapon.attributes.achieved
   );
   const requested: number[] = weapons.map(
-    (weapon: any) => weapon.attributes.requested
+    (weapon: WeaponType) => weapon.attributes.requested
   );
   const percentages: number[] = weapons.map((weapon: any) =>
     ((weapon.attributes.achieved / weapon.attributes.requested) * 100).toFixed(

@@ -11,14 +11,19 @@ import { AddIcon } from "@chakra-ui/icons";
 
 import Card from "./components/Card";
 
+import { BASE_URL } from "./constants/api";
+
 import axios from "axios";
 
-type NasharaType = {
+export type NasharaType = {
   id: number;
   attributes: {
     name: string;
     description: string;
     date: string;
+    types?: {
+      data?: [];
+    };
   };
 };
 
@@ -29,7 +34,7 @@ function App() {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get("http://localhost:1337/api/nasharas?populate=*")
+      .get(`${BASE_URL}nasharas?populate=*`)
       .then(function (response) {
         const { data } = response;
         setNasharas(data?.data);
@@ -39,8 +44,6 @@ function App() {
         console.log(error);
       });
   }, []);
-
-  console.log(nasharas);
 
   return (
     <>

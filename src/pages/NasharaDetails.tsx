@@ -14,17 +14,21 @@ import { Barchart } from "../charts/Barchart";
 import { Divider } from "@chakra-ui/react";
 
 import { useParams } from "react-router-dom";
+import { BASE_URL } from "../constants/api";
 import axios from "axios";
+
+import { NasharaType } from "../App";
+
 
 function NasharaDetails() {
   const { id } = useParams();
-  const [nashara, setNashara] = useState<any>([]);
+  const [nashara, setNashara] = useState<NasharaType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`http://localhost:1337/api/nasharas/${id}?populate=deep`)
+      .get(`${BASE_URL}nasharas/${id}?populate=deep`)
       .then(function (response) {
         console.log(response);
         const { data } = response;
@@ -36,6 +40,9 @@ function NasharaDetails() {
       });
   }, []);
 
+  console.log(nashara);
+  
+
   return (
     <>
       <Divider orientation="horizontal" />
@@ -44,13 +51,13 @@ function NasharaDetails() {
           <Center h="80px">
             <Text as="b" fontSize="2xl">
               {" "}
-              {nashara.attributes?.name}
+              {nashara?.attributes.name}
             </Text>
           </Center>
 
-          {nashara.attributes?.types?.data.map((type: any) => (
+          {nashara?.attributes.types?.data?.map((type: any) => (
             <Box
-              key={type.attributes?.name}
+              key={type.attributes.name}
               m={4}
               padding="6"
               boxShadow="lg"
@@ -59,14 +66,14 @@ function NasharaDetails() {
               <Tabs variant="soft-rounded" colorScheme="teal">
                 <TabList>
                   <Tab>{type.attributes?.name} </Tab>
-                  <Tab key={type.attributes?.name}>تحليل النشرة</Tab>
+                  <Tab key={type.attributes.name}>تحليل النشرة</Tab>
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    <Table weapons={type.attributes?.weapons.data} />
+                    <Table weapons={type.attributes.weapons.data} />
                   </TabPanel>
                   <TabPanel>
-                    <Barchart weapons={type.attributes?.weapons.data} />
+                    <Barchart weapons={type.attributes.weapons.data} />
                   </TabPanel>
                 </TabPanels>
               </Tabs>
