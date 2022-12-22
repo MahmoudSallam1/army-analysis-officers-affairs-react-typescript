@@ -33,7 +33,7 @@ export type NasharaType = {
 function App() {
   const [nasharas, setNasharas] = useState<NasharaType[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>(" ");
 
   useEffect(() => {
     setIsLoading(true);
@@ -52,14 +52,20 @@ function App() {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <Box py={6} bg="gray.100">
-        <Container  maxW="950px">
-          <Text  as="b" fontSize="2xl">
+        <Container maxW="950px">
+          <Text as="b" fontSize="2xl">
             {" "}
             بيان عددى بمطالب الجيش بنشرة تنقلات الضباط
           </Text>
-          <Button mt={4} style={{display:"block"}} leftIcon={<AddIcon />} colorScheme="teal" size="lg">
+          <Button
+            mt={4}
+            style={{ display: "block" }}
+            leftIcon={<AddIcon />}
+            colorScheme="teal"
+            size="lg"
+          >
             اضافة نشرة
           </Button>
 
@@ -85,8 +91,10 @@ function App() {
                   </GridItem>
                 ))}
             </Grid>
+          ) : error ? (
+            <Alert message={error} />
           ) : (
-            <Alert  message={error} />
+            <Alert message="لا توجد نشارات فى الوقت الحالى!" />
           )}
         </Container>
       </Box>

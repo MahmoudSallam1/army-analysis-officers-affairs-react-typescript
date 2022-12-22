@@ -18,6 +18,9 @@ import axios from "axios";
 
 import Navbar from "../components/Navbar";
 
+import Skeleton from "../components/Skeleton";
+import Alert from "../components/Alert";
+
 import { NasharaType } from "../App";
 
 function NasharaDetails() {
@@ -41,8 +44,6 @@ function NasharaDetails() {
       });
   }, []);
 
-  console.log(nashara);
-
   return (
     <>
       <Navbar />
@@ -55,30 +56,38 @@ function NasharaDetails() {
             </Text>
           </Center>
 
-          {nashara?.attributes.types?.data?.map((type: any) => (
-            <Box
-              key={type.attributes.name}
-              m={4}
-              padding="6"
-              boxShadow="lg"
-              bg="white"
-            >
-              <Tabs variant="soft-rounded" colorScheme="teal">
-                <TabList>
-                  <Tab>{type.attributes?.name} </Tab>
-                  <Tab key={type.attributes.name}>تحليل النشرة</Tab>
-                </TabList>
-                <TabPanels>
-                  <TabPanel>
-                    <Table weapons={type.attributes.weapons.data} />
-                  </TabPanel>
-                  <TabPanel>
-                    <Barchart weapons={type.attributes.weapons.data} />
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
-            </Box>
-          ))}
+          {isLoading ? (
+            <Skeleton />
+          ) : nashara ? (
+            nashara?.attributes.types?.data?.map((type: any) => (
+              <Box
+                key={type.attributes.name}
+                m={4}
+                padding="6"
+                boxShadow="lg"
+                bg="white"
+              >
+                <Tabs variant="soft-rounded" colorScheme="teal">
+                  <TabList>
+                    <Tab>{type.attributes?.name} </Tab>
+                    <Tab key={type.attributes.name}>تحليل النشرة</Tab>
+                  </TabList>
+                  <TabPanels>
+                    <TabPanel>
+                      <Table weapons={type.attributes.weapons.data} />
+                    </TabPanel>
+                    <TabPanel>
+                      <Barchart weapons={type.attributes.weapons.data} />
+                    </TabPanel>
+                  </TabPanels>
+                </Tabs>
+              </Box>
+            ))
+          ) : error ? (
+            <Alert message={error} />
+          ) : (
+            <Alert message="لا توجد نشرة فى الوقت الحالى!" />
+          )}
         </Container>
       </Box>
     </>
