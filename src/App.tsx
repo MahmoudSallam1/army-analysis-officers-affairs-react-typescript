@@ -86,7 +86,7 @@ function App() {
                 ))}
             </Grid>
           ) : (
-            <Alert message={error} />
+            <Alert  message={error} />
           )}
         </Container>
       </Box>

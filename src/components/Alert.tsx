@@ -12,7 +12,7 @@ type AlertProps = {
 
 function Alert({ message }: AlertProps) {
   return (
-    <CharkaAlert status="error">
+    <CharkaAlert mt={4} status="error">
       <AlertIcon />
       <AlertTitle>{message}</AlertTitle>
       <AlertDescription>فشل الطلب مع رمز الحالة 404</AlertDescription>

@@ -8,7 +8,7 @@ import {
 
 function Skeleton(props: any) {
   return (
-    <Stack>
+    <Stack mt={4}>
       <CharkaSkeleton height="20px" />
       <CharkaSkeleton height="20px" />
       <CharkaSkeleton height="20px" />

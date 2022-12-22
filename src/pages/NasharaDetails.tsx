@@ -11,7 +11,6 @@ import { Center } from "@chakra-ui/react";
 import Table from "../components/Table";
 
 import { Barchart } from "../charts/Barchart";
-import { Divider } from "@chakra-ui/react";
 
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../constants/api";
@@ -25,19 +24,20 @@ function NasharaDetails() {
   const { id } = useParams();
   const [nashara, setNashara] = useState<NasharaType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     setIsLoading(true);
     axios
       .get(`${BASE_URL}nasharas/${id}?populate=deep`)
       .then(function (response) {
-        console.log(response);
         const { data } = response;
         setNashara(data?.data);
         setIsLoading(false);
       })
       .catch(function (error) {
-        console.log(error);
+        setError(error.message);
+        setIsLoading(false);
       });
   }, []);
 
