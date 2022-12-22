@@ -17,8 +17,9 @@ import { useParams } from "react-router-dom";
 import { BASE_URL } from "../constants/api";
 import axios from "axios";
 
-import { NasharaType } from "../App";
+import Navbar from "../components/Navbar";
 
+import { NasharaType } from "../App";
 
 function NasharaDetails() {
   const { id } = useParams();
@@ -41,13 +42,12 @@ function NasharaDetails() {
   }, []);
 
   console.log(nashara);
-  
 
   return (
     <>
-      <Divider orientation="horizontal" />
-      <Box bg="white">
-        <Container mt={4} p={6} bg="gray.100" maxW="900px">
+      <Navbar />
+      <Box p={6} bg="gray.100">
+        <Container maxW="950px">
           <Center h="80px">
             <Text as="b" fontSize="2xl">
               {" "}

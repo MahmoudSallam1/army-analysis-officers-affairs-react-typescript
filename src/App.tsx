@@ -6,12 +6,15 @@ import { Box } from "@chakra-ui/react";
 import { Center } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { Grid, GridItem } from "@chakra-ui/react";
-import { Divider } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
+import Skeleton from "./components/Skeleton";
+import Alert from "./components/Alert";
 import Card from "./components/Card";
 
 import { BASE_URL } from "./constants/api";
+
+import Navbar from "./components/Navbar";
 
 import axios from "axios";
 
@@ -28,8 +31,9 @@ export type NasharaType = {
 };
 
 function App() {
-  const [nasharas, setNasharas] = useState<NasharaType[] | null>();
+  const [nasharas, setNasharas] = useState<NasharaType[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -41,47 +45,49 @@ function App() {
         setIsLoading(false);
       })
       .catch(function (error) {
-        console.log(error);
+        setError(error.message);
+        setIsLoading(false);
       });
   }, []);
 
   return (
     <>
-      {isLoading && <p>Loading...</p>}
-      <Divider orientation="horizontal" />
-      <Box bg="white">
-        <Container mt={4} p={6} bg="gray.100" maxW="900px">
-          <Center h="80px">
-            <Text as="b" fontSize="2xl">
-              {" "}
-              بيان عددى بمطالب الجيش بنشرة تنقلات الضباط
-            </Text>
-          </Center>
-          <Center h="80px">
-            <Button leftIcon={<AddIcon />} w="30%" colorScheme="teal" size="lg">
-              اضافة نشرة
-            </Button>
-          </Center>
+    <Navbar/>
+      <Box py={6} bg="gray.100">
+        <Container  maxW="950px">
+          <Text  as="b" fontSize="2xl">
+            {" "}
+            بيان عددى بمطالب الجيش بنشرة تنقلات الضباط
+          </Text>
+          <Button mt={4} style={{display:"block"}} leftIcon={<AddIcon />} colorScheme="teal" size="lg">
+            اضافة نشرة
+          </Button>
 
           {/* Nasharas Grid */}
-
-          <Grid
-            p={6}
-            templateColumns="repeat( auto-fit, minmax(250px, 1fr) );"
-            gap={4}
-          >
-            {nasharas &&
-              nasharas.map((nashara) => (
-                <GridItem key={nashara.id}>
-                  <Card
-                    nasharaID={nashara.id}
-                    title={nashara.attributes.name}
-                    description={nashara.attributes.description}
-                    date={nashara.attributes.date}
-                  />
-                </GridItem>
-              ))}
-          </Grid>
+          {isLoading ? (
+            <Skeleton />
+          ) : nasharas && nasharas.length > 0 ? (
+            <Grid
+              templateColumns="repeat( auto-fit, minmax(250px, 1fr) );"
+              justifyContent="center"
+              gap={4}
+              mt={10}
+            >
+              {nasharas &&
+                nasharas.map((nashara) => (
+                  <GridItem key={nashara.id}>
+                    <Card
+                      nasharaID={nashara.id}
+                      title={nashara.attributes.name}
+                      description={nashara.attributes.description}
+                      date={nashara.attributes.date}
+                    />
+                  </GridItem>
+                ))}
+            </Grid>
+          ) : (
+            <Alert message={error} />
+          )}
         </Container>
       </Box>
     </>
