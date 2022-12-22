@@ -86,7 +86,7 @@ function NasharaDetails() {
           ) : error ? (
             <Alert message={error} />
           ) : (
-            <Alert message="لا توجد نشرة فى الوقت الحالى!" />
+            <Alert message="!لا توجد نشرة فى الوقت الحالى" />
           )}
         </Container>
       </Box>

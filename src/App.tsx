@@ -94,7 +94,7 @@ function App() {
           ) : error ? (
             <Alert message={error} />
           ) : (
-            <Alert message="لا توجد نشارات فى الوقت الحالى!" />
+            <Alert message="!لا توجد نشارات فى الوقت الحالى" />
           )}
         </Container>
       </Box>
