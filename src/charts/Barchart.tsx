@@ -9,7 +9,6 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { faker } from '@faker-js/faker';
 
 ChartJS.register(
   CategoryScale,
@@ -20,37 +19,64 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top" as const,
-    },
-    title: {
-      display: true,
-      text: "Chart.js Bar Chart",
-    },
-  },
-};
+type BarProps = any;
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Dataset 1",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+export function Barchart({ weapons }: BarProps) {
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        // text: "Chart.js Bar Chart",
+      },
     },
-    {
-      label: "Dataset 2",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-  ],
-};
+  };
 
-export function Barchart() {
+  type WeaponType = {
+    attributes: {
+      name?: string;
+      achieved?: number;
+      requested?: number;
+    };
+  };
+
+  const labels: string[] = weapons.map(
+    (weapon: WeaponType) => weapon.attributes.name
+  );
+  const achieved: number[] = weapons.map(
+    (weapon: WeaponType) => weapon.attributes.achieved
+  );
+  const requested: number[] = weapons.map(
+    (weapon: WeaponType) => weapon.attributes.requested
+  );
+  const percentages: number[] = weapons.map((weapon: any) =>
+    ((weapon.attributes.achieved / weapon.attributes.requested) * 100).toFixed(
+      1
+    )
+  );
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "مطالب الجيش",
+        data: requested,
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+      {
+        label: "تم التنفيذ",
+        data: achieved,
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
+      {
+        label: "النسبة",
+        data: percentages,
+        backgroundColor: "rgba(75, 192, 192,0.5)",
+      },
+    ],
+  };
   return <Bar options={options} data={data} />;
 }
