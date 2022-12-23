@@ -1,3 +1,5 @@
+import React, { useRef } from "react";
+
 import {
   Table as CharkaTable,
   Thead,
@@ -8,14 +10,39 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Button,
 } from "@chakra-ui/react";
 
-type TableProps = any;
+import { DownloadIcon } from "@chakra-ui/icons";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
-function Table({ weapons }: TableProps) {
+type TableProps = {
+  weapons: [];
+  sheetName: string;
+};
+
+function Table({ weapons, sheetName }: TableProps) {
+  const tableRef = useRef(null);
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: tableRef.current,
+    filename: sheetName,
+    sheet: sheetName,
+  });
+
   return (
     <TableContainer>
-      <CharkaTable variant="striped">
+      <Button
+        mt={4}
+        colorScheme="teal"
+        leftIcon={<DownloadIcon />}
+        onClick={onDownload}
+        disabled={!weapons.length}
+      >
+        {" "}
+        تنزيل الاكسيل{" "}
+      </Button>
+
+      <CharkaTable mt={4} ref={tableRef} variant="striped">
         <TableCaption> ادارة شئون الضباط</TableCaption>
         <Thead>
           <Tr>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Container } from "@chakra-ui/react";
 
 import { Text } from "@chakra-ui/react";
@@ -21,10 +21,12 @@ import Navbar from "../components/Navbar";
 import Skeleton from "../components/Skeleton";
 import Alert from "../components/Alert";
 
+
 import { NasharaType } from "../App";
 
 function NasharaDetails() {
   const { id } = useParams();
+
   const [nashara, setNashara] = useState<NasharaType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
@@ -74,7 +76,7 @@ function NasharaDetails() {
                   </TabList>
                   <TabPanels>
                     <TabPanel>
-                      <Table weapons={type.attributes.weapons.data} />
+                      <Table sheetName={type.attributes.name} weapons={type.attributes.weapons.data} />
                     </TabPanel>
                     <TabPanel>
                       <Barchart weapons={type.attributes.weapons.data} />
