@@ -59,10 +59,13 @@ function Table({ weapons, sheetName }: TableProps) {
               <Td isNumeric>{weapon.attributes?.requested}</Td>
               <Td isNumeric>{weapon.attributes?.achieved}</Td>
               <Td isNumeric>
-                {(
-                  (weapon.attributes.achieved / weapon.attributes.requested) *
-                  100
-                ).toFixed(1)}
+                {isNaN(weapon.attributes.achieved / weapon.attributes.requested)
+                  ? 0
+                  : (
+                      (weapon.attributes.achieved /
+                        weapon.attributes.requested) *
+                      100
+                    ).toFixed(1)}
               </Td>
             </Tr>
           ))}
