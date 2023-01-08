@@ -18,6 +18,8 @@ import Navbar from "./components/Navbar";
 
 import axios from "axios";
 
+/**Commit from the new machine */
+
 export type NasharaType = {
   id: number;
   attributes: {
